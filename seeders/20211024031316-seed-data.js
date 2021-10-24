@@ -1,4 +1,4 @@
-import faker from 'faker';
+const faker = require('faker');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -6,7 +6,7 @@ module.exports = {
     const centresList = [
       {
         name: 'Bukit Batok CC',
-        slotCapacity: 10,
+        slot_capacity: 10,
         start_time: '09:00',
         end_time: '18:00',
         created_at: new Date(),
@@ -14,7 +14,7 @@ module.exports = {
       },
       {
         name: 'Bukit Panjang CC',
-        slotCapacity: 10,
+        slot_capacity: 10,
         start_time: '09:00',
         end_time: '19:00',
         created_at: new Date(),
@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         name: 'Bukit Timah CC',
-        slotCapacity: 10,
+        slot_capacity: 10,
         start_time: '09:00',
         end_time: '15:00',
         created_at: new Date(),
@@ -30,7 +30,7 @@ module.exports = {
       },
       {
         name: 'Outram Park Polyclinic',
-        slotCapacity: 10,
+        slot_capacity: 10,
         start_time: '08:00',
         end_time: '20:00',
         created_at: new Date(),
@@ -46,15 +46,21 @@ module.exports = {
 
     // PEOPLE
     const peopleList = [];
-    const firstChar = ['S', 'T'];
     const lastChar = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     for (let i = 0; i < 20; i += 1) {
-      const nricPrefix = firstChar[Math.floor(Math.random() * 2)];
       const nricSuffix = lastChar[Math.floor(Math.random() * lastChar.length)];
       const nricYear = Math.floor(Math.random() * 100);
+      const nricBody = (`00000${Math.floor(Math.random() * 100000).toString(10)}`).slice(-5);
+      let nricPrefix;
+      if (nricYear < 21) {
+        nricPrefix = 'T';
+      } else {
+        nricPrefix = 'S';
+      }
+
       peopleList.push({
         full_name: faker.name.findName(),
-        nric: `${nricPrefix}${nricYear}${Math.floor(Math.random() * 100000)}${nricSuffix}`,
+        nric: `${nricPrefix}${nricYear}${nricBody}${nricSuffix}`,
         created_at: new Date(),
         updated_at: new Date(),
       });
