@@ -32,6 +32,7 @@
     "faker": "^5.5.3",
     "method-override": "^3.0.0",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "url": "^0.11.0"
   }
 }
