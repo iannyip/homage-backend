@@ -20,6 +20,8 @@ app.use(express.static('public'));
 // Bind route definitions to the Express application
 bindRoutes(app);
 
+console.log('starting server...');
+
 // Set Express to listen on the given port
 const PORT = process.env.PORT || 3004;
 app.listen(PORT);
