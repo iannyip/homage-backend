@@ -29,8 +29,11 @@ export default function initBookingsController(db) {
 
   const show = async (request, response) => {
     try {
-      const data = '/bookings/:id, from inside action: show';
-      response.send(data);
+      const { id } = request.params;
+      const singleBooking = await db.Booking.findOne({
+        where: { id },
+      });
+      response.send(singleBooking);
     } catch (error) {
       console.log(error);
     }
