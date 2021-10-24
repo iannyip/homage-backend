@@ -74,9 +74,25 @@ module.exports = {
 
     // BOOKINGS
     const bookingsList = [];
+    for (let i = 0; i < people.length; i += 1) {
+      const person = people[i];
+      bookingsList.push({
+        person_id: person.id,
+        centre_id: Math.floor(Math.random() * centres.length) + 1,
+        time: '09:00',
+        created_at: new Date(),
+        updated_at: new Date(),
+      });
+    }
+    const bookings = await queryInterface.bulkInsert(
+      'bookings',
+      bookingsList,
+      { returning: true },
+    );
   },
 
   down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('bookings', null, {});
     await queryInterface.bulkDelete('people', null, {});
     await queryInterface.bulkDelete('centres', null, {});
   },
