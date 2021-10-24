@@ -39,6 +39,9 @@ db.Booking = initBookingModel(sequelize, Sequelize.DataTypes);
 db.Booking.belongsTo(db.Centre);
 db.Centre.hasMany(db.Booking);
 
+db.Person.hasOne(db.Booking);
+db.Booking.belongsTo(db.Person);
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
