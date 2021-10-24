@@ -1,5 +1,4 @@
 import { Sequelize } from 'sequelize';
-import { combineTableNames } from 'sequelize/types/lib/utils';
 import allConfig from '../config/config.js';
 
 // Get the functions from each model
@@ -23,7 +22,5 @@ db.Centre.hasMany(db.Booking);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
-console.log(db);
 
 export default db;
