@@ -12,6 +12,9 @@ export default function bindRoutes(app) {
   const bookingsController = initBookingsController(db);
 
   // routes
+  app.get('/', (request, response) => {
+    response.send('nothing to see here');
+  });
   app.get('/bookings', bookingsController.index);
   app.get('/bookings/create', bookingsController.createForm);
   app.post('/bookings/create', bookingsController.create);
