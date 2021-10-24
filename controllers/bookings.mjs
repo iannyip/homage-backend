@@ -2,7 +2,18 @@ export default function initBookingsController(db) {
   // most methods for this app will be in this controller
   const index = async (request, response) => {
     try {
-      const allBookings = await db.Booking.findAll();
+      const allBookings = await db.Booking.findAll({
+        include: [
+          {
+            model: db.Person,
+            attributes: ['fullName', 'nric'],
+          },
+          {
+            model: db.Centre,
+            attributes: ['name'],
+          },
+        ],
+      });
       response.send(allBookings);
     } catch (error) {
       console.log(error);
