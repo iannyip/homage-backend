@@ -1,3 +1,3 @@
-# Backend built for homage backend
+Backend built for homage
 
 Take home assessment
