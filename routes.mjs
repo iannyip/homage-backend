@@ -21,5 +21,5 @@ export default function bindRoutes(app) {
   app.get('/bookings/:id', bookingsController.show);
   app.get('/bookings/:id/edit', bookingsController.editForm);
   app.put('/bookings/:id/edit', bookingsController.update);
-  app.get('/bookings/:id/delete', bookingsController.destroy);
+  app.delete('/bookings/:id/delete', bookingsController.destroy);
 }
