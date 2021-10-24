@@ -2,8 +2,8 @@ export default function initBookingsController(db) {
   // most methods for this app will be in this controller
   const index = async (request, response) => {
     try {
-      const data = '/bookings, from inside index action';
-      response.send(data);
+      const allBookings = await db.Booking.findAll();
+      response.send(allBookings);
     } catch (error) {
       console.log(error);
     }
