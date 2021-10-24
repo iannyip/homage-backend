@@ -12,7 +12,11 @@ export default function initBookingsController(db) {
   const createForm = async (request, response) => {
     try {
       const data = '/bookings/create, from inside action: createForm ';
-      response.send(data);
+      const fullName = 'Claire McDermott';
+      const person = await db.Person.findOne({
+        where: { fullName },
+      });
+      response.send(person);
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +25,25 @@ export default function initBookingsController(db) {
   const create = async (request, response) => {
     try {
       const data = '/bookings/create, from inside action: create';
-      response.send(data);
+      const formData = request.body;
+      // if user is new, create a new user as well
+      // use nric to identify person
+      let person = await db.Person.findOne({
+        where: { fullName: formData.fullName },
+      });
+      if (person == null) {
+        person = await db.Person.create({
+          fullName: formData.fullName,
+          nric: formData.nric,
+        });
+      }
+      // create new booking
+      const newBooking = await db.Booking.create({
+        personId: person.id,
+        centreId: formData.centreId,
+        time: formData.time,
+      });
+      response.send(newBooking);
     } catch (error) {
       console.log(error);
     }
