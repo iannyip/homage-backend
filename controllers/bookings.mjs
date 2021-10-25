@@ -35,30 +35,29 @@ export default function initBookingsController(db) {
 
   const create = async (request, response) => {
     try {
-      const data = '/bookings/create, from inside action: create';
-      console.log('request came in!');
-      // console.log(request);
       const formData = request.body;
       console.log(formData);
+
       // if user is new, create a new user as well
       // use nric to identify person
-      // let person = await db.Person.findOne({
-      //   where: { fullName: formData.fullName },
-      // });
-      // if (person == null) {
-      //   person = await db.Person.create({
-      //     fullName: formData.fullName,
-      //     nric: formData.nric,
-      //   });
-      // }
-      // // create new booking
-      // const newBooking = await db.Booking.create({
-      //   personId: person.id,
-      //   centreId: formData.centreId,
-      //   time: formData.time,
-      // });
-      // response.send(newBooking);
-      response.send('yay received!');
+      let person = await db.Person.findOne({
+        where: { nric: formData.nric },
+      });
+      if (person == null) {
+        console.log('no such person exists! Creating new person');
+        person = await db.Person.create({
+          fullName: formData.fullName,
+          nric: formData.nric,
+        });
+      }
+      // create new booking
+      const newBooking = await db.Booking.create({
+        personId: person.id,
+        centreId: formData.centreId,
+        date: formData.date,
+        time: formData.time,
+      });
+      response.sendstatus(200);
     } catch (error) {
       console.log(error);
     }
