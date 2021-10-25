@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default function initCentresController(db) {
   // For now, centres will have no controllers
   const index = async (request, response) => {
@@ -18,7 +20,27 @@ export default function initCentresController(db) {
       console.log('getting slots!');
       console.log(`id: ${id}`);
       console.log(`date: ${date}`);
-      response.send(200);
+
+      // Get the particular centre's details
+      const centreOperation = await db.Centre.findOne({
+        where: { id },
+        attributes: ['startTime', 'endTime', 'slotCapacity'],
+      });
+
+      // Generate array of timeslots and capacity
+      const timeslots = [];
+      const startArr = centreOperation.startTime.split(':');
+      const endArr = centreOperation.endTime.split(':');
+      const slotCount = (endArr[0] - startArr[0]) * 4;
+      for (let i = 0; i < slotCount; i += 1) {
+        timeslots.push({
+          time: moment().hours(startArr[0]).minutes(0).add(i * 15, 'm')
+            .format('HH:mm'),
+          capacity: centreOperation.slotCapacity,
+        });
+      }
+
+      response.send(timeslots);
     } catch (error) {
       console.log(error);
     }
