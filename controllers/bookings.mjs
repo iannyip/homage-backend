@@ -57,7 +57,8 @@ export default function initBookingsController(db) {
         date: formData.date,
         time: formData.time,
       });
-      response.sendstatus(200);
+      response.send(200);
+      // response.status(200);
     } catch (error) {
       console.log(error);
     }
