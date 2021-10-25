@@ -1,4 +1,5 @@
 const faker = require('faker');
+const moment = require('moment');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -45,7 +46,7 @@ module.exports = {
     // PEOPLE
     const peopleList = [];
     const lastChar = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    for (let i = 0; i < 20; i += 1) {
+    for (let i = 0; i < 60; i += 1) {
       const nricSuffix = lastChar[Math.floor(Math.random() * lastChar.length)];
       const nricYear = Math.floor(Math.random() * 100);
       const nricBody = (`00000${Math.floor(Math.random() * 100000).toString(10)}`).slice(-5);
@@ -77,7 +78,9 @@ module.exports = {
       bookingsList.push({
         person_id: person.id,
         centre_id: Math.floor(Math.random() * centres.length) + 1,
-        time: '09:00',
+        date: moment().add(Math.floor(Math.random() * 10), 'd').toDate(),
+        time: moment().hours(9).minutes(0).add(Math.floor(Math.random() * 40) * 15, 'm')
+          .format('HH:mm'),
         created_at: new Date(),
         updated_at: new Date(),
       });

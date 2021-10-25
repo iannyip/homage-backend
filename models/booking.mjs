@@ -24,6 +24,10 @@ export default function initBookingModel(sequelize, DataTypes) {
           key: 'id',
         },
       },
+      date: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
       time: {
         allowNull: false,
         type: DataTypes.TIME,

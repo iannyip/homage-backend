@@ -79,6 +79,10 @@ module.exports = {
           key: 'id',
         },
       },
+      date: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
       time: {
         allowNull: false,
         type: Sequelize.TIME,
