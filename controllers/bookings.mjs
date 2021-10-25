@@ -37,6 +37,7 @@ export default function initBookingsController(db) {
     try {
       const data = '/bookings/create, from inside action: create';
       console.log('request came in!');
+      // console.log(request);
       const formData = request.body;
       console.log(formData);
       // if user is new, create a new user as well
