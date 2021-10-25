@@ -21,6 +21,11 @@ export default function initCentresController(db) {
       console.log(`id: ${id}`);
       console.log(`date: ${date}`);
 
+      // handle null requests
+      if (id === 0) {
+        response.send(204);
+      }
+
       // Get the particular centre's details
       const centreOperation = await db.Centre.findOne({
         where: { id },
