@@ -91,6 +91,7 @@ export default function initBookingsController(db) {
   const update = async (request, response) => {
     try {
       const updatedData = request.body;
+      console.log(updatedData);
       const updatedPerson = await db.Person.update(
         {
           fullName: updatedData.name,
@@ -102,8 +103,9 @@ export default function initBookingsController(db) {
         {
           centreId: updatedData.centre,
           date: updatedData.date,
-          time: updatedData.time,
+          time: updatedData.chosenSlot,
         },
+        { where: { id: updatedData.bookingId } },
       );
       console.log('======== updatedPerson');
       console.log(updatedPerson);
