@@ -3,40 +3,38 @@ const faker = require('faker');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     // CENTRES
-    const centresList = [
-      {
-        name: 'Bukit Batok CC',
+    const centreNames = [
+      'Radin Mas Community Club',
+      'Buona Vista Community Club',
+      'Potong Pasir Community Club',
+      'Raffles City Convention Centre',
+      'Tanjong Pagar Community Club',
+      'Jalan Besar Community Club',
+      'Bishan Community Club',
+      'Queenstown Community Centre',
+      'Toa Payoh West Community Club',
+      'Marine Parade Community Club',
+      'Geylang Serai Community Club',
+      'Tampines East Community Club',
+      'Bedok Community Centre',
+      'Pasir Ris Elias Community Club',
+      'Arena@ Our Tampines Hub (Hockey Court)',
+      'Woodlands Community Club',
+      'Woodlands Galaxy Community Club',
+      'Canberra Community Club',
+      'Nee Soon East Community Club',
+    ];
+    const centresList = [];
+    for (let i = 0; i < centreNames.length; i += 1) {
+      centresList.push({
+        name: centreNames[i],
         slot_capacity: 10,
         start_time: '09:00',
         end_time: '18:00',
         created_at: new Date(),
         updated_at: new Date(),
-      },
-      {
-        name: 'Bukit Panjang CC',
-        slot_capacity: 10,
-        start_time: '09:00',
-        end_time: '19:00',
-        created_at: new Date(),
-        updated_at: new Date(),
-      },
-      {
-        name: 'Bukit Timah CC',
-        slot_capacity: 10,
-        start_time: '09:00',
-        end_time: '15:00',
-        created_at: new Date(),
-        updated_at: new Date(),
-      },
-      {
-        name: 'Outram Park Polyclinic',
-        slot_capacity: 10,
-        start_time: '08:00',
-        end_time: '20:00',
-        created_at: new Date(),
-        updated_at: new Date(),
-      },
-    ];
+      });
+    }
 
     const centres = await queryInterface.bulkInsert(
       'centres',
