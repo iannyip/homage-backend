@@ -5,7 +5,7 @@ export default function initCentresController(db) {
       const allCentres = await db.Centre.findAll({
         attributes: ['id', 'name'],
       });
-      allCentres.push({ name: 'None', id: 0 });
+      allCentres.unshift({ name: 'None', id: 0 });
       response.send(allCentres);
     } catch (error) {
       console.log(error);
