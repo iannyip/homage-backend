@@ -79,7 +79,7 @@ module.exports = {
         person_id: person.id,
         centre_id: Math.floor(Math.random() * centres.length) + 1,
         date: moment().add(Math.floor(Math.random() * 10), 'd').toDate(),
-        time: moment().hours(9).minutes(0).add(Math.floor(Math.random() * 40) * 15, 'm')
+        time: moment().hours(9).minutes(0).add(Math.floor(Math.random() * 30) * 15, 'm')
           .format('HH:mm'),
         created_at: new Date(),
         updated_at: new Date(),
