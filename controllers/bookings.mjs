@@ -67,19 +67,22 @@ export default function initBookingsController(db) {
   const show = async (request, response) => {
     try {
       const { id } = request.params;
+      console.log('received request for one booking!');
+      console.log(id);
       const singleBooking = await db.Booking.findOne({
         where: { id },
+        include: [
+          {
+            model: db.Person,
+            attributes: ['fullName', 'nric'],
+          },
+          {
+            model: db.Centre,
+            attributes: ['name'],
+          },
+        ],
       });
       response.send(singleBooking);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const editForm = async (request, response) => {
-    try {
-      const data = '/bookings/:id/edit, from inside action: editForm';
-      response.send(data);
     } catch (error) {
       console.log(error);
     }
@@ -113,7 +116,6 @@ export default function initBookingsController(db) {
     createForm,
     create,
     show,
-    editForm,
     update,
     destroy,
   };
