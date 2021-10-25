@@ -12,7 +12,20 @@ export default function initCentresController(db) {
     }
   };
 
+  const showSlots = async (request, response) => {
+    try {
+      const { id, date } = request.params;
+      console.log('getting slots!');
+      console.log(`id: ${id}`);
+      console.log(`date: ${date}`);
+      response.send(200);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     index,
+    showSlots,
   };
 }

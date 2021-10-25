@@ -24,4 +24,5 @@ export default function bindRoutes(app) {
   app.delete('/bookings/:id/delete', bookingsController.destroy);
 
   app.get('/centres', centresController.index);
+  app.get('/centres/:id/:date', centresController.showSlots);
 }
