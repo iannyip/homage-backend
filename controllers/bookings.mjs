@@ -97,10 +97,12 @@ export default function initBookingsController(db) {
   const destroy = async (request, response) => {
     try {
       const { id } = request.params;
+      console.log('delete req came in!');
+      console.log(id);
       await db.Booking.destroy({
-        where: { peroson_id: id },
+        where: { id },
       });
-      response.send(200);
+      response.sendStatus(200);
     } catch (error) {
       console.log(error);
     }
