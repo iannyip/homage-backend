@@ -74,7 +74,7 @@ export default function initBookingsController(db) {
         include: [
           {
             model: db.Person,
-            attributes: ['fullName', 'nric'],
+            attributes: ['fullName', 'nric', 'id'],
           },
           {
             model: db.Centre,
@@ -90,8 +90,26 @@ export default function initBookingsController(db) {
 
   const update = async (request, response) => {
     try {
-      const data = '/bookings/:id/edit, from inside action: update';
-      response.send(data);
+      const updatedData = request.body;
+      const updatedPerson = await db.Person.update(
+        {
+          fullName: updatedData.name,
+          nric: updatedData.nric,
+        },
+        { where: { id: updatedData.personId } },
+      );
+      const updatedBooking = await db.Booking.update(
+        {
+          centreId: updatedData.centre,
+          date: updatedData.date,
+          time: updatedData.time,
+        },
+      );
+      console.log('======== updatedPerson');
+      console.log(updatedPerson);
+      console.log('======== updatedBooking');
+      console.log(updatedBooking);
+      response.send(200);
     } catch (error) {
       console.log(error);
     }
